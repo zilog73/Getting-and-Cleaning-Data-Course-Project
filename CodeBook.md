@@ -20,34 +20,18 @@ The 5 steps of the script are:
 1. Read the files X_train, y_train, X_test, y_test into data tables. The X files have fixed length so the read_fwf() function is used to specify multiple fields with specified length. 
 2. Both X files are merged and their columns names are assigned from another data table that contains all the features. 
 3. The Y files are then merged and their column named as "Activity_Number".
-4. Subject files are read and merged as data tables
-5. Finally the X, Y and Subject data tables are merged into another data table called dtAllData
+4. Subject files are read and merged as data tables.
+5. Finally the X, Y and Subject data tables are merged into another data table called dtAllData.
     
 #Step 2. Extracts only the measurements on the mean and standard deviation for each measurement.
+1. The columns with mean() or std() are then filtered and a new data table is created with the name dtSelectedColumns.
 
-#Select columns with mean or std included in the name
-selectedColumns <- grep("\\bmean()\\b|\\bstd()\\b|Activity_Number|Subject_Number", names(dtAllData))
-dtSelectedColumns <- select(dtAllData, selectedColumns)
+#Step 3. Uses descriptive activity names to name the activities in the data set.
+1. The activity_labels file is read and load into the data table dtActivity with 2 columns: "Activity_Number" and "Activity_Name".
+2. Merge the data tables dtSelectedColumns and dtActivityTrain by the "Activity_Number"
+3. Delete the "Activity_Number" from the data table dtWithActivityNames, as it is no longer needed
 
-############################################################################
-#3. Uses descriptive activity names to name the activities in the data set.#
-############################################################################
-
-#Read the activity_labels file with 2 variables into a data table
-dtActivity <- data.table(read.csv("./activity_labels.txt", sep = " ", header = FALSE))
-
-#Assign the variable names Activity_Number and Activity_Name to the 2 columns
-names(dtActivity) <- c("Activity_Number","Activity_Name")
-
-#Merge the dtSelectedColumns with the dtActivityTrain to provide the activity names for any activity number
-dtWithActivityNames <- merge(dtSelectedColumns, dtActivity, by = "Activity_Number")
-
-#Delete the activity number as it is no longer needed
-dtWithActivityNames[, Activity_Number:=NULL]
-
-#######################################################################
-#4. Appropriately labels the data set with descriptive variable names.#
-#######################################################################
+#Step 4. Appropriately labels the data set with descriptive variable names.
 
 names(dtWithActivityNames) <- sub("^t","Time ",names(dtWithActivityNames))
 names(dtWithActivityNames) <- sub("^f","Frequency ",names(dtWithActivityNames))
@@ -63,7 +47,7 @@ names(dtWithActivityNames) <- sub("-X"," (X)",names(dtWithActivityNames))
 names(dtWithActivityNames) <- sub("-Y"," (Y)",names(dtWithActivityNames))
 names(dtWithActivityNames) <- sub("-Z"," (Z)",names(dtWithActivityNames))
 
-#5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+#Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 #Apply colMeans on the data table, grouped by Activity_Name and Subject_Number
 dtGroupedWithAverage <- ddply(dtWithActivityNames, .(Activity_Name, Subject_Number), function(x) colMeans(x[, 1:66]))
