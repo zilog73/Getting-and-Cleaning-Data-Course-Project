@@ -16,50 +16,14 @@ The libraries used to run the code are
 ##Code
 The 5 steps of the script are:
 
-1. Merges the training and the test sets to create one data set.
-    1.1 xxx
-    1.2 xxx
-
-#Read the x files for train and test, with 651 variables of fixed lenght (16) into a data table
-dtXTrain <- data.table(read_fwf("./X_train.txt", fwf_widths(c(rep(16,561)))))
-dtXTest <- data.table(read_fwf("./X_test.txt", fwf_widths(c(rep(16,561)))))
-
-#Merge the x files
-dtX <- rbind(dtXTrain, dtXTest) 
+#Step 1. Merges the training and the test sets to create one data set
+1. Read the files X_train, y_train, X_test, y_test into data tables. The X files have fixed length so the read_fwf() function is used to specify multiple fields with specified length. 
+2. Both X files are merged and their columns names are assigned from another data table that contains all the features. 
+3. The Y files are then merged and their column named as "Activity_Number".
+4. Subject files are read and merged as data tables
+5. Finally the X, Y and Subject data tables are merged into another data table called dtAllData
     
-#Read the features file into a data table and assign the variable names to the columns
-dtFeatures <- data.table(read.csv("./features.txt", sep = " ", header = FALSE))
-names(dtFeatures) <- c("Column","Feature")
-
-#Assign the variable names extracted from dtFeatures to dtX
-names(dtX) <- as.character(dtFeatures$Feature)
-
-#Read the y files with the activity number into a data table
-dtYTrain <- data.table(read.csv("./y_train.txt", header = FALSE))
-dtYTest <- data.table(read.csv("./y_test.txt", header = FALSE))
-
-#Merge the y files
-dtY <- rbind(dtYTrain, dtYTest) 
-
-#Assign the variable name Activity_Number to the column
-names(dtY) <- "Activity_Number"
-
-#Read the subject files with the subject number into a data table
-dtSubjectTrain <- data.table(read.csv("./subject_train.txt", header = FALSE))
-dtSubjectTest <- data.table(read.csv("./subject_test.txt", header = FALSE))
-
-#Merge the y files
-dtSubject <- rbind(dtSubjectTrain, dtSubjectTest) 
-
-#Assign the variable name Subject_Number to the column
-names(dtSubject) <- "Subject_Number"
-
-#Merge x_train, y_file and subject_train files and their columns into a one
-dtAllData <- cbind(dtX, dtY, dtSubject)
-
-############################################################################################
-#2. Extracts only the measurements on the mean and standard deviation for each measurement.#
-############################################################################################
+#Step 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
 #Select columns with mean or std included in the name
 selectedColumns <- grep("\\bmean()\\b|\\bstd()\\b|Activity_Number|Subject_Number", names(dtAllData))
