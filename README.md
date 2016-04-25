@@ -3,7 +3,7 @@ This repository has the files needed for the submission of the  Course Project f
 
 The original inout files area available at https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-Files
+# Files
 
 CodeBook.md contains the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
 
