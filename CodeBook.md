@@ -17,6 +17,8 @@ The libraries used to run the code are
 The 5 steps of the script are:
 
 1. Merges the training and the test sets to create one data set.
+    1.1 xxx
+    1.2 xxx
 
 #Read the x files for train and test, with 651 variables of fixed lenght (16) into a data table
 dtXTrain <- data.table(read_fwf("./X_train.txt", fwf_widths(c(rep(16,561)))))
