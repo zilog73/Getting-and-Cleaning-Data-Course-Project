@@ -1,4 +1,9 @@
 ##Libraries
+The libraries used to run the code are 
+- data.table
+- readr
+- plyr
+- dplyr
 
 
 ##Variables
@@ -11,11 +16,6 @@
 #################
 #Library imports#
 #################
-library(data.table)
-install.packages("readr")
-library(readr)
-library(plyr)
-library(dplyr)
 
 ##################################################################
 #1. Merges the training and the test sets to create one data set.#
