@@ -5,17 +5,17 @@ The libraries used to run the code are
 - plyr
 - dplyr
 
-
 ##Variables
+- dtXTrain, dtXTest, dtYTrain, dtYTest,  dtFeatures, dtSubjectTrain, dtSubjectTest and dtActivity are data tables used to load the data from the files
+- dtX, dtY dtSubject and dtAllData are data tables created in the code to merge the data tables created from the files
+- selectedColumns has the columns filtered by mean() and std(), as instructed.
+- dtSelectedColumns is the data table obtained when filtering by the columns selected above
+- dtWithActivityNames is the data table containing the activities as descriptive names
+- dtGroupedWithAverage is the final data table containing the average for the variables selected grouped by subject and activity
 
 
 ##Code
 
-
-
-#################
-#Library imports#
-#################
 
 ##################################################################
 #1. Merges the training and the test sets to create one data set.#
