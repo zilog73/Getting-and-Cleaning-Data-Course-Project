@@ -32,25 +32,8 @@ The 5 steps of the script are:
 3. Delete the "Activity_Number" from the data table dtWithActivityNames, as it is no longer needed
 
 #Step 4. Appropriately labels the data set with descriptive variable names.
-
-names(dtWithActivityNames) <- sub("^t","Time ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("^f","Frequency ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- gsub("Body","Body ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("Acc","Acceleration ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("Gravity","Gravity ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("Gyro","Gyroscope ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("Jerk","Jerk ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("Mag","Magnitude ",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("-mean\\(\\)","Mean",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("-std\\(\\)","Standard Deviation",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("-X"," (X)",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("-Y"," (Y)",names(dtWithActivityNames))
-names(dtWithActivityNames) <- sub("-Z"," (Z)",names(dtWithActivityNames))
+1. Abbreviatons like Acc, Gyro, etc. are replaced by a more descriptive name.
 
 #Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-
-#Apply colMeans on the data table, grouped by Activity_Name and Subject_Number
-dtGroupedWithAverage <- ddply(dtWithActivityNames, .(Activity_Name, Subject_Number), function(x) colMeans(x[, 1:66]))
-
-#Write the data table into a TXT file
-write.table(dtGroupedWithAverage, "tidy_average_data.txt", row.name=FALSE)
+1. Apply colMeans on the data table dtGroupedWithAverage, grouped by Activity_Name and Subject_Number
+2. Write the data table dtGroupedWithAverage into a TXT file called "tidy_average_data.txt"
