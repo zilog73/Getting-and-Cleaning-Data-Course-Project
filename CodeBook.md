@@ -1,11 +1,11 @@
-##Libraries
+#Libraries
 The libraries used to run the code are 
 - data.table
 - readr
 - plyr
 - dplyr
 
-##Variables
+#Variables
 - dtXTrain, dtXTest, dtYTrain, dtYTest,  dtFeatures, dtSubjectTrain, dtSubjectTest and dtActivity are data tables used to load the data from the files
 - dtX, dtY dtSubject and dtAllData are data tables created in the code to merge the data tables created from the files
 - selectedColumns has the columns filtered by mean() and std(), as instructed.
@@ -13,10 +13,10 @@ The libraries used to run the code are
 - dtWithActivityNames is the data table containing the activities as descriptive names
 - dtGroupedWithAverage is the final data table containing the average for the variables selected grouped by subject and activity
 
-##Code
+#Code
 The 5 steps of the script are:
 
-#Step 1. Merges the training and the test sets to create one data set
+##Step 1. Merges the training and the test sets to create one data set
 1. Read the files X_train, y_train, X_test, y_test into data tables. The X files have fixed length so the read_fwf() function is used to specify multiple fields with specified length. 
 2. Both X files are merged and their columns names are assigned from another data table that contains all the features. 
 3. The Y files are then merged and their column named as "Activity_Number".
