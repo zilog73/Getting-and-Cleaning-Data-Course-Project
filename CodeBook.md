@@ -23,17 +23,17 @@ The 5 steps of the script are:
 4. Subject files are read and merged as data tables.
 5. Finally the X, Y and Subject data tables are merged into another data table called dtAllData.
     
-#Step 2. Extracts only the measurements on the mean and standard deviation for each measurement.
+##Step 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 1. The columns with mean() or std() are then filtered and a new data table is created with the name dtSelectedColumns.
 
-#Step 3. Uses descriptive activity names to name the activities in the data set.
+##Step 3. Uses descriptive activity names to name the activities in the data set.
 1. The activity_labels file is read and load into the data table dtActivity with 2 columns: "Activity_Number" and "Activity_Name".
 2. Merge the data tables dtSelectedColumns and dtActivityTrain by the "Activity_Number"
 3. Delete the "Activity_Number" from the data table dtWithActivityNames, as it is no longer needed
 
-#Step 4. Appropriately labels the data set with descriptive variable names.
+##Step 4. Appropriately labels the data set with descriptive variable names.
 1. Abbreviatons like Acc, Gyro, etc. are replaced by a more descriptive name.
 
-#Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+##Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 1. Apply colMeans on the data table dtGroupedWithAverage, grouped by Activity_Name and Subject_Number
 2. Write the data table dtGroupedWithAverage into a TXT file called "tidy_average_data.txt"
